@@ -32,19 +32,17 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <form class="bootstrap-form-with-validation">
-                <h2 class="text-center">Quero registrar minha insatisfação</h2>
+            {!! Form::open(['route' => 'complaints.create',"id"=>"form"]) !!}
+             <h2 class="text-center">Quero registrar minha insatisfação</h2>
                 <div class="form-group">
-                    <label class="control-label" for="text-input">Estado </label>
-                    <select class="form-control">
-                        <option value="1">Bahia</option>
-                    </select>
+                    {!! Form::label('uf', 'Estado:') !!}
+                    {!! Form::select('uf', [], null, ['id'=>'uf','class' => 'form-control']) !!}
+                    {!! $errors->first('uf', '<div class="text-danger">:message</div>') !!}
                 </div>
                 <div class="form-group">
-                    <label class="control-label" for="password-input">Cidade </label>
-                    <select class="form-control">
-                        <option value="1">Salvador</option>
-                    </select>
+                    {!! Form::label('city', 'Cidade:') !!}
+                    {!! Form::select('city',[], null, ['id'=>'cidade','class' => 'form-control']) !!}
+                    {!! $errors->first('city', '<div class="text-danger">:message</div>') !!}
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="email-input">Empresa </label>
@@ -67,6 +65,14 @@
 </div>
 <script src="{{asset('assets/js/jquery.min.js')}}"></script>
 <script src="{{asset('assets/bootstrap/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('assets/js/scripts.js')}}"></script>
+<script>
+    $('#uf').ufs({
+        onChange: function(uf){
+            $('#cidade').cidades({uf: uf});
+        }
+    });
+</script>
 </body>
 
 </html>
