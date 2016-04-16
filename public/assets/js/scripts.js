@@ -16,6 +16,7 @@
             })
 
             settings.onChange(select.val());
+            $('#uf').trigger('change');
 
         }, 'json');
 
@@ -47,9 +48,25 @@
                     select.append('<option value="' + value.id + '" '+((settings.default==value.id || settings.default==value.nome)?'selected':'')+'>' + value.nome + '</option>');
                 })
 
+                $('#cidade').trigger('change');
             }, 'json');
 
         }
     };
 
 }( jQuery ));
+
+$('#uf').select2({
+    "language": {
+        "noResults": function(){
+            return "UF não encontrada!";
+        }
+    }
+});
+$('#cidade').select2({
+    "language": {
+        "noResults": function(){
+            return "Cidade não encontrada!";
+        }
+    },
+});
